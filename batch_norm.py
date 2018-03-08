@@ -14,10 +14,10 @@ import lasagne
 import theano
 import theano.tensor as T
 
-class BatchNormLayer(lasagne.layers.Layer):
 
+class BatchNormLayer(lasagne.layers.Layer):
     def __init__(self, incoming, axes=None, epsilon=0.01, alpha=0.5,
-            nonlinearity=None, **kwargs):
+                 nonlinearity=None, **kwargs):
         """
         Instantiates a layer performing batch normalization of its inputs,
         following Ioffe et al. (http://arxiv.org/abs/1502.03167).
@@ -92,6 +92,7 @@ class BatchNormLayer(lasagne.layers.Layer):
         gamma = T.addbroadcast(self.gamma, *self.axes)
         normalized = (input - mean) * (gamma / std) + beta
         return self.nonlinearity(normalized)
+
 
 def batch_norm(layer):
     """
